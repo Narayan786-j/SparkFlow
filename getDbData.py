@@ -1,6 +1,6 @@
 import time
 start_time = time.time()
-print(f"[{time.strftime('%X')}] 🔄 Starting getDbData load...")
+print(f"[{time.strftime('%X')}] Starting getDbData load...")
 import json
 import traceback
 from utils.database.models import *
@@ -21,7 +21,7 @@ from requests.auth import HTTPBasicAuth
 from starlette.responses import JSONResponse
 
 load_dotenv()
-print(f"[{time.strftime('%X')}] ✅ getDbData loaded in {time.time() - start_time:.2f}s")
+print(f"[{time.strftime('%X')}] getDbData loaded in {time.time() - start_time:.2f}s")
 
 
 def get_job_config_by_job_instance_id(connection, request: RunJobRequest):
@@ -327,7 +327,7 @@ def DeleteK8Pods(endpoint: str, podname: str, namespace: str, token: str) -> boo
 
     configuration = client.Configuration()
     configuration.host = k8s_url
-    configuration.verify_ssl = False  # ⚠️ Not recommended in production
+    configuration.verify_ssl = False  
     configuration.api_key_prefix['authorization'] = 'Bearer'
     configuration.api_key['authorization'] = token
 
@@ -352,7 +352,7 @@ def DeleteK8Pods(endpoint: str, podname: str, namespace: str, token: str) -> boo
                         namespace=namespace,
                         grace_period_seconds=0
                     )
-                    logger.info(f"✅ Pod '{pod_name}' deleted successfully.")
+                    logger.info(f" Pod '{pod_name}' deleted successfully.")
                 except ApiException as e:
                     if e.status == 404:
                         logger.warning(f"Pod '{pod_name}' not found. Might already be deleted.")
@@ -363,7 +363,7 @@ def DeleteK8Pods(endpoint: str, podname: str, namespace: str, token: str) -> boo
         return True
 
     except Exception as e:
-        logger.exception("❌ Failed to delete pods.")
+        logger.exception(" Failed to delete pods.")
         raise
 
 def CheckJobDeploymenExits(endpoint, job_name_with_id, namespace, token, K8Type):
