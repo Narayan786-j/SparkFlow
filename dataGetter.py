@@ -5,7 +5,7 @@ from typing import List
 from starlette.responses import JSONResponse
 
 start_time = time.time()
-print(f"[{time.strftime('%X')}] 🔄 Starting dataGetter load...")
+print(f"[{time.strftime('%X')}] Starting dataGetter load...")
 from sqlalchemy.orm import Session
 from utils.exceptions import Error
 from utils.logger import logger
@@ -14,7 +14,7 @@ import base64
 import json
 import getDbData as db
 import constants
-print(f"[{time.strftime('%X')}] ✅ dataGetter loaded in {time.time() - start_time:.2f}s")
+print(f"[{time.strftime('%X')}] dataGetter loaded in {time.time() - start_time:.2f}s")
 
 
 def run_job(request: RunJobRequest, connection: Session):
@@ -130,7 +130,7 @@ def run_job(request: RunJobRequest, connection: Session):
                     # Check if resources still exist
                     ExitsStatus = db.CheckJobDeploymenExits(url, job_name_with_id, namespace, token, K8Type)
                     if ExitsStatus:
-                        logger.info("🔄 Job/Deployment still exists, waiting...")
+                        logger.info("Job/Deployment still exists, waiting...")
                         time.sleep(3)
 
                 db.DeleteK8Pods(url, job_name_with_id, namespace, token)
