@@ -1,6 +1,6 @@
 import time
 start_time = time.time()
-print(f"[{time.strftime('%X')}] 🔄 Starting mainImport load...")
+print(f"[{time.strftime('%X')}] Starting mainImport load...")
 
 from fastapi import FastAPI, HTTPException
 from starlette.responses import JSONResponse
@@ -13,7 +13,7 @@ import traceback
 from utils.logger import logger
 from utils.exceptions import Error
 import dataGetter as DG
-print(f"[{time.strftime('%X')}] ✅ mainImport loaded in {time.time() - start_time:.2f}s")
+print(f"[{time.strftime('%X')}] mainImport loaded in {time.time() - start_time:.2f}s")
 
 # ------------ Load Environment Variables ------------
 load_dotenv()
@@ -32,7 +32,7 @@ ORACLE_USERNAME = os.environ.get("ORACLE_USERNAME")
 ORACLE_PASSWORD = os.environ.get("ORACLE_PASSWORD")
 
 if not all([ORACLE_HOST, ORACLE_USERNAME, ORACLE_PASSWORD]):
-    raise Exception("❌ DB credentials are missing in environment variables.")
+    raise Exception("DB credentials are missing in environment variables.")
 
 # SQLAlchemy engine for Oracle (using oracledb in thin mode)
 DATABASE_URL = f"oracle+oracledb://{ORACLE_USERNAME}:{ORACLE_PASSWORD}@{ORACLE_HOST}"
@@ -41,9 +41,9 @@ try:
     start_db_connection = time.time()
     engine = create_engine(DATABASE_URL, echo=False)
     SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-    print(f"[{time.strftime('%X')}] ✅ DB connection established in {time.time() - start_db_connection:.2f}s")
+    print(f"[{time.strftime('%X')}] DB connection established in {time.time() - start_db_connection:.2f}s")
 
-    print("✅ SQLAlchemy Oracle engine created successfully.")
+    print("SQLAlchemy Oracle engine created successfully.")
 except Exception as e:
     print(f"❌ Failed to create engine: {str(e)}")
     raise
@@ -71,7 +71,7 @@ def run_job(run_job_request: RunJobRequest):
 
     except Exception as e:
         traceback.print_exc()
-        logger.logger.error(f"❌ ERROR OCCURRED: {str(e)}")
+        logger.logger.error(f"ERROR OCCURRED: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
     finally:
@@ -96,7 +96,7 @@ def stop_job(stop_job_request: StopJobRequestSchema):
 
     except Exception as e:
         traceback.print_exc()
-        logger.logger.error(f"❌ ERROR OCCURRED: {str(e)}")
+        logger.logger.error(f"ERROR OCCURRED: {str(e)}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
     finally:
