@@ -1,4 +1,4 @@
-Based on the ALL_INDIA4 project, here are resume-ready descriptions for a Data Engineer role:
+Based on the ALL_INDIA4 project
 
 Option 1: Concise (2-3 lines)
 ClickHouse Data Pipeline Engineer Architected and implemented a high-throughput IPDR data pipeline processing 100+ billion rows/day across an 11-feed enrichment system on a 9-node sharded ClickHouse cluster. Designed a dual-cluster split (CH1→CH2) architecture to separate ingestion/enrichment from analytics, reducing query latency by 50-100x on 54% of production workloads.
